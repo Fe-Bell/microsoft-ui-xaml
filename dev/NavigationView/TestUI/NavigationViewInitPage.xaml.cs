@@ -21,7 +21,18 @@ namespace MUXControlsTestApp
 
     public sealed partial class NavigationViewInitPage : TestPage
     {
-        ObservableCollection<string> m_menuItems;
+        //public class Category
+        //{
+        //    public String Content { get; set; }
+
+        //    public Category(String content)
+        //    {
+        //        this.Content = content;
+        //    }
+        //}
+
+
+        ObservableCollection<Category> m_menuItems;
         LinkedList<string> m_menuItemsEnumerable = null;
 
         public NavigationViewInitPage()
@@ -31,12 +42,12 @@ namespace MUXControlsTestApp
             MaterialHelperTestApi.IgnoreAreEffectsFast = true;
             MaterialHelperTestApi.SimulateDisabledByPolicy = false;
 
-            m_menuItems = new ObservableCollection<string>();
+            m_menuItems = new ObservableCollection<Category>();
 
-            m_menuItems.Add("Menu Item 1");
-            m_menuItems.Add("Menu Item 2");
-            m_menuItems.Add("Menu Item 3");
-            m_menuItems.Add("Music");
+            m_menuItems.Add(new Category("Menu Item 1"));
+            m_menuItems.Add(new Category("Menu Item 2"));
+            m_menuItems.Add(new Category("Menu Item 3"));
+            m_menuItems.Add(new Category("Music"));
 
             NavView.MenuItemsSource = m_menuItems;
             NavView.SelectedItem = m_menuItems[0];
@@ -54,7 +65,7 @@ namespace MUXControlsTestApp
         {
             if (m_menuItemsEnumerable == null)
             {
-                m_menuItems.Add("New Menu Item");
+                m_menuItems.Add(new Category("New Menu Item"));
             }
             else
             {

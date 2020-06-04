@@ -6,6 +6,7 @@
 #include "NavigationViewItemBase.h"
 #include "NavigationViewItem.h"
 #include "ItemTemplateWrapper.h"
+#include <ElementFactoryRecycleArgs.h>
 
 void NavigationViewItemsFactory::UserElementFactory(winrt::IInspectable const& newValue)
 {
@@ -43,6 +44,26 @@ winrt::UIElement NavigationViewItemsFactory::GetElementCore(winrt::ElementFactor
     // Create a wrapping container for the data
     auto nvi = winrt::make_self<NavigationViewItem>();
     nvi->Content(newContent);
+    if (newContent != args.Data())
+    {
+        if (auto itemTemplateWrapper = m_itemTemplateWrapper.try_as<ItemTemplateWrapper>())
+        {
+            if (auto dataTemplate = itemTemplateWrapper->Template())
+            {
+                nvi->ContentTemplate(dataTemplate);
+            }
+            else if (auto selector = itemTemplateWrapper->TemplateSelector())
+            {
+                nvi->ContentTemplateSelector(selector);
+            }
+            nvi->Content(args.Data());
+
+            // Recycle newContent
+            auto const args = winrt::make_self<ElementFactoryRecycleArgs>();
+            args->Element(newContent.try_as<winrt::UIElement>());
+            m_itemTemplateWrapper.RecycleElement(static_cast<winrt::ElementFactoryRecycleArgs>(*args));
+        }
+    }
     return *nvi;
 }
 

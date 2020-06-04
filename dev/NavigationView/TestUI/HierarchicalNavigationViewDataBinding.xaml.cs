@@ -21,7 +21,7 @@ namespace MUXControlsTestApp
         public ObservableCollection<Category> Children { get; set; }
         public bool SelectsOnInvoked { get; set; }
 
-        public Category(String content, String name, String icon, ObservableCollection<Category> children, bool selectsOnInvoked)
+        public Category(String content, String name = null, String icon = null, ObservableCollection<Category> children = null, bool selectsOnInvoked = true)
         {
             this.Content = content;
             this.Name = name;
@@ -77,7 +77,7 @@ namespace MUXControlsTestApp
 
         }
 
-        private void ClickedItem(object sender, NavigationViewItemInvokedEventArgs e)
+        private void NavView_ItemInvoked(object sender, NavigationViewItemInvokedEventArgs e)
         {
             var clickedItem = e.InvokedItem;
             var clickedItemContainer = e.InvokedItemContainer;

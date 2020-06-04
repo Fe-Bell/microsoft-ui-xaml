@@ -176,7 +176,7 @@ NavigationView::NavigationView()
 
     m_navigationViewItemsFactory = winrt::make_self<NavigationViewItemsFactory>();
 
-    s_NavigationViewItemRevokersProperty =
+    s_NavigationViewItemRevokersProperty = 
         InitializeDependencyProperty(
             L"NavigationViewItemRevokers",
             winrt::name_of<winrt::IInspectable>(),
@@ -2020,6 +2020,28 @@ void NavigationView::RaiseItemInvoked(winrt::IInspectable const& item,
             MUX_ASSERT(invokedContainer);
         }
     }
+
+    //if(!container)
+    //{
+    //    // InvokedItem is container for Settings, but Content of item for other ListViewItem
+    //    if (!isSettings)
+    //    {
+    //        invokedContainer = NavigationViewItemBaseOrSettingsContentFromData(item);
+    //    }
+    //    else
+    //    {
+    //        MUX_ASSERT(item);
+    //        invokedContainer = item.try_as<winrt::NavigationViewItemBase>();
+    //        MUX_ASSERT(invokedContainer);
+    //    }
+    //}
+
+    //if (!invokedItem)
+    //{
+    //    invokedItem = container.Content();
+    //}
+
+
     eventArgs->InvokedItem(invokedItem);
     eventArgs->InvokedItemContainer(invokedContainer);
     eventArgs->IsSettingsInvoked(isSettings);

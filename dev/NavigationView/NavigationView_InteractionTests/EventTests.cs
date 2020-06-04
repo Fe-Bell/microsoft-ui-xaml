@@ -121,7 +121,7 @@ namespace Windows.UI.Xaml.Tests.MUXControls.InteractionTests.NavigationViewTests
             using (var setup = new TestSetupHelper(new[] { "NavigationView Tests", "NavigationView Init Test" }))
             {
                 const string navigationViewItemType = "Microsoft.UI.Xaml.Controls.NavigationViewItem";
-                const string stringType = "System.String";
+                const string itemType = "MUXControlsTestApp.Category";
 
                 var itemInvokedItemType = new Edit(FindElement.ById("ItemInvokedItemType"));
                 var itemInvokedItemContainerType = new Edit(FindElement.ById("ItemInvokedItemContainerType"));
@@ -134,11 +134,11 @@ namespace Windows.UI.Xaml.Tests.MUXControls.InteractionTests.NavigationViewTests
                 Wait.ForIdle();
 
                 Log.Comment("Verify that item invoked returns expected parameters.");
-                Verify.IsTrue(itemInvokedItemType.Value == stringType);
+                Verify.IsTrue(itemInvokedItemType.Value == itemType);
                 Verify.IsTrue(itemInvokedItemContainerType.Value == navigationViewItemType);
 
                 Log.Comment("Verify that selection changed event returns expected parameters");
-                Verify.IsTrue(selectionChangedItemtype.Value == stringType);
+                Verify.IsTrue(selectionChangedItemtype.Value == itemType);
                 Verify.IsTrue(selectionChangedItemContainerType.Value == navigationViewItemType);
             }
         }

@@ -14,11 +14,20 @@
         <DataTemplate x:Key="NavigationViewMenuItem" x:DataType="local:Category">
             <muxcontrols:NavigationViewItem Content="{x:Bind Content}" Name="{x:Bind Name}" MenuItemsSource="{x:Bind Children}" SelectsOnInvoked="{x:Bind SelectsOnInvoked}"/>
         </DataTemplate>
+
+        <!--<DataTemplate x:Key="NavigationViewMenuItem" x:DataType="local:Category">
+            <TextBlock Text="{x:Bind}"/>
+        </DataTemplate>-->
     </Page.Resources>
 
     <Grid>
-        <muxcontrols:NavigationView x:Name="navview" MenuItemsSource="{x:Bind categories, Mode=OneWay}" MenuItemTemplate="{StaticResource NavigationViewMenuItem}"
-                                    ItemInvoked="{x:Bind ClickedItem}" Expanding="OnItemExpanding" Collapsed="OnItemCollapsed" PaneDisplayMode="Left">
+        <muxcontrols:NavigationView x:Name="navview"
+                                    MenuItemsSource="{x:Bind categories, Mode=OneWay}"
+                                    MenuItemTemplate="{StaticResource NavigationViewMenuItem}"
+                                    ItemInvoked="NavView_ItemInvoked"
+                                    Expanding="OnItemExpanding"
+                                    Collapsed="OnItemCollapsed"
+                                    PaneDisplayMode="Left">
             <StackPanel Margin="10,10,0,0">
                 <TextBlock x:Name="SelectedItemLabel" AutomationProperties.Name="SelectedItemLabel" Text="uninitialized"/>
                 <Button Content="Get Selected Item Label" x:Name="GetSelectedItemLabelButton" AutomationProperties.Name="GetSelectedItemLabelButton" Click="PrintSelectedItem"/>

@@ -9,6 +9,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <local:TestPage.Resources>
+        <DataTemplate x:Key="NavigationViewItemDataTemplate" x:DataType="local:Category">
+            <Grid x:Name="GRIDSTAMPEDOUTBYDATATEMPLATE">
+                <TextBlock Text="{x:Bind Content}"/>
+            </Grid>
+        </DataTemplate>
+    </local:TestPage.Resources>
+
     <Grid Background="Plum">
         <StackPanel>
             <controls:NavigationView x:Name="NavView"
@@ -20,6 +28,7 @@
                 AlwaysShowHeader="False"
                 ItemInvoked="NavView_ItemInvoked"
                 SelectionChanged="NavView_SelectionChanged"
+                MenuItemTemplate="{StaticResource NavigationViewItemDataTemplate}"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
                 <StackPanel Orientation="Vertical" Margin="8,0,0,0">
